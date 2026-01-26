@@ -28,6 +28,12 @@ export const ResultsView = ({ primary, secondary, isCombo, onReset, userName }: 
         width: 1080,
         height: 1920,
         quality: 1,
+        cacheBust: true,
+        fetchRequestInit: {
+          mode: 'cors',
+          cache: 'no-cache',
+        },
+        skipAutoScale: true,
       });
       
       const link = document.createElement('a');
@@ -62,7 +68,7 @@ export const ResultsView = ({ primary, secondary, isCombo, onReset, userName }: 
       >
         <div className="bg-adhoc-violet px-8 py-10 text-center text-white relative">
           <span className="text-xs font-bold tracking-[0.2em] opacity-80 uppercase mb-2 block">
-            SOS EL ARQUETIPO:
+            personalidad de:
           </span>
           <h1 className="text-3xl md:text-5xl font-display leading-tight italic">
             {isCombo ? (
@@ -102,27 +108,15 @@ export const ResultsView = ({ primary, secondary, isCombo, onReset, userName }: 
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div className="bg-gray-50 p-6 rounded-3xl border border-gray-100">
-              <span className="text-xl mb-3 block">🚀</span>
-              <h4 className="font-bold text-xs uppercase tracking-widest text-gray-400 mb-2">Superpoder</h4>
-              <p className="text-sm font-medium leading-relaxed">{data.superpower}</p>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-3xl border border-gray-100">
-              <span className="text-xl mb-3 block">🚨</span>
-              <h4 className="font-bold text-xs uppercase tracking-widest text-gray-400 mb-2">Talón de Aquiles</h4>
-              <p className="text-sm font-medium leading-relaxed">{data.risk}</p>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-3xl border border-gray-100">
-              <span className="text-xl mb-3 block">⚡</span>
-              <h4 className="font-bold text-xs uppercase tracking-widest text-gray-400 mb-2">Next Level</h4>
-              <p className="text-sm font-medium leading-relaxed">{data.upgrade}</p>
-            </div>
+          <div className="bg-adhoc-violet/5 p-8 rounded-3xl border border-adhoc-violet/20 mb-12">
+            <span className="text-2xl mb-3 block text-center">💡</span>
+            <h4 className="font-bold text-sm uppercase tracking-widest text-adhoc-violet mb-4 text-center">Tip según la personalidad</h4>
+            <p className="text-base font-medium leading-relaxed text-center text-adhoc-deep">{data.tip}</p>
           </div>
 
           <div className="border-t border-gray-100 pt-8">
             <h4 className="text-center text-xs font-bold uppercase tracking-widest text-gray-400 mb-6 font-sans">
-              Te emparentás con vibes de...
+              cantantes del momento
             </h4>
             <div className="flex flex-wrap justify-center gap-4">
               {data.vibes.map((vibe, i) => (

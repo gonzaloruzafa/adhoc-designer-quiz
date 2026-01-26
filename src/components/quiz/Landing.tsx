@@ -19,8 +19,7 @@ export const Landing = () => {
           <span className="italic text-adhoc-violet">sin filtro.</span>
         </h1>
         <p className="text-lg text-gray-600 mb-10 max-w-xl mx-auto">
-          Te digo tu arquetipo + tus ‘powers’ + tu talón de Aquiles + 3 referentes vibe.
-          <span className="block mt-2 font-medium">Mini-juego de 60–90 segundos.</span>
+          <span className="font-medium">Mini-juego de segundos.</span>
         </p>
         
         <button

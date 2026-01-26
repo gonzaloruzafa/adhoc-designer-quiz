@@ -27,9 +27,9 @@ export const QuestionCard = ({ question, onAnswer }: QuestionCardProps) => {
               key={index}
               whileTap={{ scale: 0.98 }}
               onClick={() => onAnswer(option.type)}
-              className="w-full p-5 text-left border-2 border-transparent bg-white rounded-2xl hover:border-adhoc-violet hover:bg-adhoc-violet/5 transition-all text-lg shadow-sm group relative overflow-hidden"
+              className="w-full p-4 md:p-5 text-left border-2 border-transparent bg-white rounded-2xl hover:border-adhoc-violet hover:bg-adhoc-violet/5 transition-all text-sm md:text-lg shadow-sm group relative overflow-hidden break-words"
             >
-              <span className="relative z-10">{option.text}</span>
+              <span className="relative z-10 pr-6">{option.text}</span>
               <div className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
                 →
               </div>

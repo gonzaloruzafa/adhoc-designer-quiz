@@ -30,6 +30,7 @@ export interface ArchetypeData {
   superpower: string;
   risk: string;
   upgrade: string;
+  tip: string;
   vibes: string[];
   image: string;
 }
