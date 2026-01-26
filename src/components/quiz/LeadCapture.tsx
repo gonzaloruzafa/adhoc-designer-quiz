@@ -26,7 +26,7 @@ export const LeadCapture = ({ onComplete }: LeadCaptureProps) => {
         animate={{ opacity: 1, y: 0 }}
         className="absolute top-6 left-1/2 -translate-x-1/2 z-20"
       >
-        <Image src="/adhoc-logo.png" alt="Adhoc" width={70} height={24} className="h-auto opacity-70" />
+        <Image src="/adhoc-logo.png" alt="Adhoc" width={70} height={24} className="h-auto" />
       </motion.div>
 
       <motion.div

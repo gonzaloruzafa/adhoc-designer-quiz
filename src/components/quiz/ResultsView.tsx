@@ -234,7 +234,7 @@ export const ResultsView = ({ primary, secondary, isCombo, onReset, userName }: 
 
       {/* Footer branding */}
       <div className="mt-auto pt-10">
-        <Image src="/adhoc-logo.png" alt="Adhoc" width={70} height={24} className="h-auto opacity-40" />
+        <Image src="/adhoc-logo.png" alt="Adhoc" width={70} height={24} className="h-auto" />
       </div>
     </div>
   );
