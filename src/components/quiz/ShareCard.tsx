@@ -23,7 +23,7 @@ export const ShareCard = ({ primary, secondary, isCombo, name }: ShareCardProps)
   return (
     <div 
       id="share-card"
-      className="fixed left-[-9999px] top-0 w-[1080px] h-[1920px] bg-adhoc-deep text-white flex flex-col items-center justify-between p-20 text-center relative overflow-hidden"
+      className="w-[1080px] h-[1920px] bg-adhoc-deep text-white flex flex-col items-center justify-between p-20 text-center relative overflow-hidden"
     >
       {/* Decorative background */}
       <div className="absolute top-0 left-0 w-full h-full opacity-10">

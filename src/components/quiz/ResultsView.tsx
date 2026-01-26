@@ -162,12 +162,14 @@ export const ResultsView = ({ primary, secondary, isCombo, onReset, userName }: 
       </div>
 
       {/* Hidden Share Card for Image Generation */}
-      <ShareCard 
-        primary={primary} 
-        secondary={secondary} 
-        isCombo={isCombo} 
-        name={userName} 
-      />
+      <div className="fixed left-[-9999px] top-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        <ShareCard 
+          primary={primary} 
+          secondary={secondary} 
+          isCombo={isCombo} 
+          name={userName} 
+        />
+      </div>
       
       <button 
         onClick={onReset}
