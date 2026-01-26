@@ -5,6 +5,7 @@ import { Download, Share2, RefreshCw, Sparkles } from "lucide-react";
 import { toPng } from "html-to-image";
 import { ShareCard } from "./ShareCard";
 import { useRef, useState } from "react";
+import Image from "next/image";
 
 interface ResultsViewProps {
   primary: Archetype;
@@ -231,7 +232,7 @@ export const ResultsView = ({ primary, secondary, isCombo, onReset, userName }: 
 
       {/* Footer branding */}
       <div className="mt-auto pt-10">
-        <span className="text-xs text-gray-300 font-medium tracking-wider">by ADHOC</span>
+        <Image src="/adhoc-logo.png" alt="Adhoc" width={70} height={24} className="h-auto opacity-40" />
       </div>
     </div>
   );

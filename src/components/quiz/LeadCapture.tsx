@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Mail, User } from "lucide-react";
+import Image from "next/image";
 
 interface LeadCaptureProps {
   onComplete: (data: { name: string; email: string }) => void;
@@ -18,7 +19,16 @@ export const LeadCapture = ({ onComplete }: LeadCaptureProps) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-6 max-w-md mx-auto text-center">
+    <div className="flex flex-col items-center justify-center min-h-screen px-6 max-w-md mx-auto text-center relative">
+      {/* Adhoc Logo - Top */}
+      <motion.div 
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="absolute top-6 left-1/2 -translate-x-1/2 z-20"
+      >
+        <Image src="/adhoc-logo.png" alt="Adhoc" width={70} height={24} className="h-auto opacity-70" />
+      </motion.div>
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

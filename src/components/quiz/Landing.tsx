@@ -1,6 +1,7 @@
 import { useQuizStore } from "@/store/useQuizStore";
 import { motion } from "framer-motion";
 import { Sparkles, ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 export const Landing = () => {
   const nextStep = useQuizStore((state) => state.nextStep);
@@ -13,6 +14,15 @@ export const Landing = () => {
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-adhoc-coral/10 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-adhoc-lavender/5 rounded-full blur-3xl" />
       </div>
+
+      {/* Adhoc Logo - Top */}
+      <motion.div 
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="absolute top-6 left-1/2 -translate-x-1/2 z-20"
+      >
+        <Image src="/adhoc-logo.png" alt="Adhoc" width={80} height={28} className="h-auto opacity-80" />
+      </motion.div>
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -61,15 +71,7 @@ export const Landing = () => {
         </p>
       </motion.div>
 
-      {/* Adhoc branding */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <span className="text-sm text-gray-300 font-medium tracking-wider">by ADHOC</span>
-      </motion.div>
+      {/* Adhoc branding - hidden since we have the top logo */}
     </div>
   );
 };
