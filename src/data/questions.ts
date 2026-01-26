@@ -29,14 +29,14 @@ export const QUESTIONS: Question[] = [
     options: [
       { text: "\"Sí, con adicional / alcance claro.\"", type: "estructurada" },
       { text: "\"Ok… veamos cómo lo encuadramos.\"", type: "pro" },
-      { text: "Me quejo", type: "hype" },
+      { text: "Si obvio! (y después me quejo)", type: "hype" },
       { text: "\"Te digo y aprendemos juntas?\"", type: "principiante" },
       { text: "Me gusta la propuesta", type: "artista" },
     ],
   },
   {
     id: 4,
-    text: "Cuando estás hasta las manos, tu modo automático es...",
+    text: "Cuando estás hasta las manos, tu solución es...",
     options: [
       { text: "Hacer lo + imp / urgente (tareas)", type: "estructurada" },
       { text: "Sentarme a trabajar hasta terminar todo", type: "pro" },

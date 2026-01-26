@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Download, Share2, RefreshCw } from "lucide-react";
 import { toPng } from "html-to-image";
 import { ShareCard } from "./ShareCard";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 interface ResultsViewProps {
   primary: Archetype;
@@ -18,22 +18,33 @@ export const ResultsView = ({ primary, secondary, isCombo, onReset, userName }: 
   const data = ARCHETYPES[primary];
   const secondaryData = secondary ? ARCHETYPES[secondary] : null;
   const shareCardRef = useRef<HTMLDivElement>(null);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   const handleDownload = async () => {
     const el = document.getElementById('share-card');
-    if (!el) return;
+    if (!el || isDownloading) return;
+    
+    setIsDownloading(true);
     
     try {
+      // Esperar un poco para que la imagen esté cargada
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
       const dataUrl = await toPng(el, {
         width: 1080,
         height: 1920,
         quality: 1,
         cacheBust: true,
+        pixelRatio: 1,
         fetchRequestInit: {
           mode: 'cors',
           cache: 'no-cache',
         },
         skipAutoScale: true,
+        filter: (node) => {
+          // Excluir nodos problemáticos si los hay
+          return true;
+        },
       });
       
       const link = document.createElement('a');
@@ -41,7 +52,10 @@ export const ResultsView = ({ primary, secondary, isCombo, onReset, userName }: 
       link.href = dataUrl;
       link.click();
     } catch (err) {
-      console.error('oops, something went wrong!', err);
+      console.error('Error al descargar:', err);
+      alert('Hubo un problema al generar la imagen. Intentá de nuevo.');
+    } finally {
+      setIsDownloading(false);
     }
   };
 
@@ -132,10 +146,11 @@ export const ResultsView = ({ primary, secondary, isCombo, onReset, userName }: 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 w-full max-w-2xl">
         <button 
           onClick={handleDownload}
-          className="flex items-center justify-center gap-2 bg-adhoc-violet text-white py-4 px-6 rounded-2xl font-medium hover:opacity-90 transition-opacity shadow-lg shadow-adhoc-violet/20"
+          disabled={isDownloading}
+          className="flex items-center justify-center gap-2 bg-adhoc-violet text-white py-4 px-6 rounded-2xl font-medium hover:opacity-90 transition-opacity shadow-lg shadow-adhoc-violet/20 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <Download size={20} />
-          Descargar Story
+          <Download size={20} className={isDownloading ? 'animate-pulse' : ''} />
+          {isDownloading ? 'Generando...' : 'Descargar Story'}
         </button>
         <button 
           onClick={handleShare}

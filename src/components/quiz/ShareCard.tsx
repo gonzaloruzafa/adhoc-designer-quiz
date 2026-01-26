@@ -11,6 +11,14 @@ interface ShareCardProps {
 export const ShareCard = ({ primary, secondary, isCombo, name }: ShareCardProps) => {
   const data = ARCHETYPES[primary];
   const secondaryData = secondary ? ARCHETYPES[secondary] : null;
+  
+  // Convertir ruta relativa a absoluta para html-to-image
+  const getAbsoluteImageUrl = (relativePath: string) => {
+    if (typeof window !== 'undefined') {
+      return `${window.location.origin}${relativePath}`;
+    }
+    return relativePath;
+  };
 
   return (
     <div 
@@ -44,9 +52,10 @@ export const ShareCard = ({ primary, secondary, isCombo, name }: ShareCardProps)
 
         <div className="w-[600px] h-[600px] bg-adhoc-violet/20 rounded-full flex items-center justify-center p-12 border-8 border-white/10 shadow-2xl">
           <img 
-            src={data.image} 
+            src={getAbsoluteImageUrl(data.image)} 
             alt={data.name} 
             className="w-full h-full object-contain"
+            crossOrigin="anonymous"
           />
         </div>
 
