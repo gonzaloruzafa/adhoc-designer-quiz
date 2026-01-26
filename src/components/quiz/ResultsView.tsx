@@ -96,7 +96,7 @@ export const ResultsView = ({ primary, secondary, isCombo, onReset, userName }: 
         className="w-full bg-white rounded-3xl shadow-xl shadow-gray-200/50 overflow-hidden border border-gray-100"
       >
         {/* Header with gradient */}
-        <div className="bg-gradient-to-br from-adhoc-violet via-adhoc-violet to-adhoc-lavender px-6 md:px-10 py-10 md:py-14 text-center text-white relative overflow-hidden">
+        <div className="bg-gradient-to-br from-adhoc-violet via-adhoc-violet to-adhoc-lavender px-6 md:px-10 py-8 md:py-10 text-center text-white relative overflow-hidden">
           {/* Decorative circles */}
           <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
           <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
@@ -116,19 +116,21 @@ export const ResultsView = ({ primary, secondary, isCombo, onReset, userName }: 
               data.name
             )}
           </h1>
-          
-          {/* Sticker */}
+        </div>
+
+        {/* Image Section with White Background */}
+        <div className="bg-white px-6 md:px-10 py-10 md:py-12 flex justify-center -mt-1">
           <motion.div 
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.4, type: "spring" }}
-            className="mt-8 flex justify-center relative z-10"
+            className="relative"
           >
-            <div className="w-36 h-36 md:w-44 md:h-44 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center p-3 border-4 border-white/30 shadow-2xl">
+            <div className="w-56 h-56 md:w-72 md:h-72 bg-gradient-to-br from-gray-50 to-white rounded-3xl flex items-center justify-center p-6 border-4 border-adhoc-violet/10 shadow-2xl shadow-adhoc-violet/10">
               <img 
                 src={data.image} 
                 alt={data.name} 
-                className="w-full h-full object-contain drop-shadow-lg"
+                className="w-full h-full object-contain"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = "https://placehold.co/400x400/7C6CD8/white?text=✨";
                 }}
@@ -137,7 +139,7 @@ export const ResultsView = ({ primary, secondary, isCombo, onReset, userName }: 
           </motion.div>
         </div>
 
-        <div className="p-6 md:p-10">
+        <div className="p-6 md:p-10 pt-0">
           {/* Tagline & Description */}
           <div className="text-center mb-8">
             <h3 className="text-xl md:text-2xl font-display text-adhoc-deep mb-3 italic">
