@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { ArrowRight, Mail, User } from "lucide-react";
 
 interface LeadCaptureProps {
   onComplete: (data: { name: string; email: string }) => void;
@@ -13,64 +14,88 @@ export const LeadCapture = ({ onComplete }: LeadCaptureProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Logic to save to Supabase will go here or in parent
     onComplete({ name, email });
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] px-6 max-w-lg mx-auto text-center">
+    <div className="flex flex-col items-center justify-center min-h-screen px-6 max-w-md mx-auto text-center">
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-premium relative overflow-hidden w-full"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-full"
       >
-        <div className="absolute top-0 left-0 w-full h-2 bg-adhoc-violet"></div>
-        
-        <h2 className="text-3xl font-display text-adhoc-deep mb-4">¡Listo!</h2>
-        <p className="text-gray-600 mb-8">
-          Dejanos tu nombre y email para ver tus resultados y descargar tu placa personalizada.
+        {/* Success icon */}
+        <motion.div 
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ delay: 0.2, type: "spring" }}
+          className="w-20 h-20 bg-gradient-to-br from-adhoc-violet to-adhoc-lavender rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-adhoc-violet/20"
+        >
+          <span className="text-3xl">🎉</span>
+        </motion.div>
+
+        <h2 className="text-3xl md:text-4xl font-display text-adhoc-deep mb-3">
+          ¡Ya casi!
+        </h2>
+        <p className="text-gray-500 mb-8 text-sm md:text-base">
+          Dejanos tu nombre y email para ver tu resultado personalizado
         </p>
         
-        <form onSubmit={handleSubmit} className="space-y-4 text-left">
-          <div>
-            <label className="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1 mb-2 block">
-              Nombre
-            </label>
+        <motion.form 
+          onSubmit={handleSubmit} 
+          className="space-y-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
+          <div className="relative">
+            <User size={18} className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
               required
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="¿Cómo te llamas?"
-              className="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-adhoc-violet transition-all outline-none"
+              placeholder="Tu nombre"
+              className="w-full pl-14 pr-6 py-4 bg-white border border-gray-200 rounded-xl focus:border-adhoc-violet focus:ring-2 focus:ring-adhoc-violet/20 transition-all outline-none text-adhoc-deep"
             />
           </div>
           
-          <div>
-            <label className="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1 mb-2 block">
-              Email
-            </label>
+          <div className="relative">
+            <Mail size={18} className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
               required
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="tu@email.com"
-              className="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-adhoc-violet transition-all outline-none"
+              className="w-full pl-14 pr-6 py-4 bg-white border border-gray-200 rounded-xl focus:border-adhoc-violet focus:ring-2 focus:ring-adhoc-violet/20 transition-all outline-none text-adhoc-deep"
             />
           </div>
           
-          <button
+          <motion.button
             type="submit"
-            disabled={loading}
-            className="w-full bg-adhoc-violet text-white py-4 rounded-2xl text-lg font-medium hover:opacity-90 transition-opacity mt-4 disabled:opacity-50"
+            disabled={loading || !name || !email}
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
+            className="w-full bg-adhoc-violet text-white py-4 rounded-xl text-lg font-medium hover:bg-adhoc-violet/90 transition-all shadow-lg shadow-adhoc-violet/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 group mt-2"
           >
-            {loading ? "Calculando..." : "Ver mis resultados"}
-          </button>
-        </form>
+            {loading ? (
+              <>
+                <span className="animate-spin">⏳</span>
+                Calculando...
+              </>
+            ) : (
+              <>
+                Ver mi resultado
+                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              </>
+            )}
+          </motion.button>
+        </motion.form>
         
-        <p className="text-[10px] text-gray-400 mt-6 leading-relaxed">
-          Al continuar, aceptás recibir novedades de Adhoc. No mandamos spam, solo cosas útiles para diseñadoras.
+        <p className="text-xs text-gray-400 mt-8 leading-relaxed max-w-xs mx-auto">
+          No mandamos spam, solo cosas útiles para diseñadoras ✨
         </p>
       </motion.div>
     </div>
