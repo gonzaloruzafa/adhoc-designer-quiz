@@ -65,11 +65,6 @@ export default function Home() {
           />
         )}
       </AnimatePresence>
-      
-      {/* Brand Footer */}
-      <footer className="py-8 text-center text-gray-400 text-xs uppercase tracking-widest mt-auto">
-        Una creación de <span className="text-adhoc-violet font-bold">Adhoc</span>
-      </footer>
     </main>
   );
 }
