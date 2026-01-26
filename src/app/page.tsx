@@ -1,65 +1,75 @@
-import Image from "next/image";
+"use client";
+
+import { useQuizStore } from "@/store/useQuizStore";
+import { Landing } from "@/components/quiz/Landing";
+import { QuestionCard } from "@/components/quiz/QuestionCard";
+import { ProgressBar } from "@/components/quiz/ProgressBar";
+import { LeadCapture } from "@/components/quiz/LeadCapture";
+import { ResultsView } from "@/components/quiz/ResultsView";
+import { QUESTIONS } from "@/data/questions";
+import { saveLead } from "@/services/leads";
+import { AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 export default function Home() {
+  const { currentStep, nextStep, setAnswer, resetQuiz, getResults } = useQuizStore();
+  const [userName, setUserName] = useState("");
+
+  const handleAnswer = (questionId: number, type: any) => {
+    setAnswer(questionId, type);
+    nextStep();
+  };
+
+  const handleLeadCapture = async (data: { name: string; email: string }) => {
+    setUserName(data.name);
+    const { primary } = getResults();
+    await saveLead({
+      ...data,
+      archetype: primary,
+    });
+    nextStep();
+  };
+
+  const handleReset = () => {
+    setUserName("");
+    resetQuiz();
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+    <main className="min-h-screen bg-gray-50 flex flex-col font-sans">
+      <AnimatePresence mode="wait">
+        {currentStep === 0 && (
+          <Landing key="landing" />
+        )}
+
+        {currentStep >= 1 && currentStep <= 8 && (
+          <div key="quiz" className="flex flex-col flex-1">
+            <ProgressBar current={currentStep} total={8} />
+            <QuestionCard
+              question={QUESTIONS[currentStep - 1]}
+              onAnswer={(type) => handleAnswer(QUESTIONS[currentStep - 1].id, type)}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+          </div>
+        )}
+
+        {currentStep === 9 && (
+          <LeadCapture key="capture" onComplete={handleLeadCapture} />
+        )}
+
+        {currentStep === 10 && (
+          <ResultsView
+            key="results"
+            {...getResults()}
+            userName={userName}
+            onReset={handleReset}
+          />
+        )}
+      </AnimatePresence>
+      
+      {/* Brand Footer */}
+      <footer className="py-8 text-center text-gray-400 text-xs uppercase tracking-widest mt-auto">
+        Una creación de <span className="text-adhoc-violet font-bold">Adhoc</span>
+      </footer>
+    </main>
   );
 }
