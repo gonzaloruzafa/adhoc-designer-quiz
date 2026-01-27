@@ -6,7 +6,7 @@ export const QUESTIONS: Question[] = [
     text: "Tu mesa de trabajo en este momento se parece más a...",
     options: [
       { text: "📋 ...con todo etiquetado (paneles) ✅", type: "estructurada" },
-      { text: "✨ ...parece simple, pero todo en su lugar!", type: "pro" },
+      { text: "✨ ...parece un quilombo, pero está todo en su lugar!", type: "pro" },
       { text: "📄 ...papeles por todos lados", type: "hype" },
       { text: "🔨 ...armando mi espacio de trabajo", type: "principiante" },
       { text: "🎨 ...lleno de cosas que me inspiran", type: "artista" },
@@ -25,13 +25,13 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: 3,
-    text: "Cliente: \"¿podés sumar esto que no estaba?\"",
+    text: "Cliente: \"¿podés hacer esta corrección?\"",
     options: [
       { text: "📝 \"Sí, con adicional / alcance claro.\"", type: "estructurada" },
       { text: "🤔 \"Ok… veamos cómo lo encuadramos.\"", type: "pro" },
-      { text: "😤 Si obvio! (y después me quejo)", type: "hype" },
-      { text: "💬 \"Te digo y aprendemos juntas?\"", type: "principiante" },
-      { text: "💡 Me gusta la propuesta", type: "artista" },
+      { text: "😤 \"Si obvio! (y después me quejo)", type: "hype" },
+      { text: "💬 \"Si de una! (ni loca contradigo a mi cliente)\"", type: "principiante" },
+      { text: "💡 \"Si, me re copa", type: "artista" },
     ],
   },
   {
@@ -85,7 +85,7 @@ export const QUESTIONS: Question[] = [
       { text: "✂️ \"Menos es más.\"", type: "estructurada" },
       { text: "🤫 \"Que quede bien, sin hacer ruido.\"", type: "pro" },
       { text: "🚀 \"Dale, lo saco.\"", type: "hype" },
-      { text: "🛤️ \"El camino.\"", type: "principiante" },
+      { text: "🛤️ \"Me mando y después veo (estoy recién arracando).\"", type: "principiante" },
       { text: "🎉 \"Si no me divierte, no lo hago.\"", type: "artista" },
     ],
   },
