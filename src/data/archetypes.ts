@@ -23,7 +23,7 @@ export const ARCHETYPES: Record<string, ArchetypeData> = {
     superpower: "consistencia + calidad + paz mental",
     risk: "cobrar de menos por no querer molestar",
     upgrade: "Bloque fijo semanal para admin (45 min)",
-    tip: "Definí tus "no negociables" antes de empezar cada proyecto. Poner límites por escrito baja la fricción con el cliente.",
+    tip: "Definí tus 'no negociables' antes de empezar cada proyecto. Poner límites por escrito baja la fricción con el cliente.",
     vibes: ["Billie Eilish", "Olivia Rodrigo", "The Weeknd"],
     image: "/images/archetypes/pro.png",
   },
